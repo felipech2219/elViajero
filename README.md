@@ -1,2 +1,2 @@
 # elViajero
-elViajero: plataforma web para descrubrir destinos y experiencias de viaje 
+elViajero: plataforma web para descubrir destinos y experiencias de viaje 
