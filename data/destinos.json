@@ -1,14 +1,72 @@
 [
     {
     "id": 1,
+    "nombre": "Parque Nacional Manuel Antonio",
+    "categoria": "Parque Nacional",
+    "ubicacion": "Quepos, Puntarenas",
+    "descripcion": "Parque famoso por sus playas de arena blanca, senderos naturales y abundante fauna silvestre",
+    "clima": "Tropical húmedo",
+    "actividades": "Senderismo, observación de fauna, playa",
+    "horario": "7:00am - 4:00pm",
+    "reserva anticipada": "Si",
+    "url": "https://serviciosenlinea.sinac.go.cr/",
+    "imagen": "img/manuelAntonio.png"
+    },
+
+    {
+    "id": 2,
     "nombre": "Volcán Arenal",
-    "categoria": "Volcanes",
-    "descripcion": "Uno de los volcanes más visitados de Costa Rica.",
-    "ubicacion": "La Fortuna, San Carlos",
-    "horario": "08:00 AM - 05:00 PM",
-    "clima": "Tropical",
-    "estado": "Disponible",
-    "imagen": "img/volcan-arenal.jpg"
+    "categoria": "Montaña",
+    "ubicacion": "La Fortuna, Alajuela",
+    "descripcion": "Uno de los volcanes más emblemáticos de Costa Rica, rodeado por bosques, aguas termales y una gran biodiversidad",
+    "clima": "Tropical lluvioso",
+    "actividades": "Senderismo, aguas termales, observación de naturaleza",
+    "horario": "8:00am - 4:00pm",
+    "reserva anticipada": "No",
+    "url": "",
+    "imagen": "img/volcanArenal.png"
+    },
+
+    {
+    "id": 3,
+    "nombre": "Cerro Chirripó",
+    "categoria": "Montaña",
+    "ubicacion": "San Gerardo de Rivas, San José",
+    "descripcion": "La montaña más alta de Costa Rica y uno de los destinos favoritos para excursionistas y amantes de la aventura",
+    "clima": "Frío de montaña",
+    "actividades": "Senderismo, camping, fotografía",
+    "horario": "4:00am - 5:00pm",
+    "reserva anticipada": "Si",
+    "url": "https://serviciosenlinea.sinac.go.cr/",
+    "imagen": "img/cerroChirripo.png"
+    },
+
+    {
+    "id": 4,
+    "nombre": "Parque Nacional Corcovado",
+    "categoria": "Parque Nacional",
+    "ubicacion": "Península de Osa, Puntarenas",
+    "descripcion": "Considerado uno de los lugares con mayor biodiversidad del planeta y hogar de numerosas especies de flora y fauna",
+    "clima": "Tropical húmedo",
+    "actividades": "Senderismo, observación de fauna, ecoturismo",
+    "horario": "7:00am - 4:00pm",
+    "reserva anticipada": "Si",
+    "url": "https://serviciosenlinea.sinac.go.cr/",
+    "imagen": "img/corcovado.png"
+    },
+
+    {
+    "id": 5,
+    "nombre": "Playa Tamarindo",
+    "categoria": "Playa",
+    "ubicacion": "Tamarindo, Guanacaste",
+    "descripcion": "Uno de los destinos de playa más populares del país, reconocido por el surf, la gastronomía y la vida nocturna",
+    "clima": "Tropical seco",
+    "actividades": "Surf, natación, paseos en bote",
+    "horario": "Acceso libre",
+    "reserva anticipada": "No",
+    "url": "",
+    "imagen": "img/playaTamarindo.png"
     }
 ]
 

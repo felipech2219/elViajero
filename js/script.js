@@ -42,12 +42,22 @@ function crearTarjeta(destino) {
     nombre.textContent = destino.nombre || "Destino sin nombre";
     contenido.append(nombre);
 
-    agregarDato(contenido, "ID", destino.id);
+    /*agregarDato(contenido, "ID", destino.id);*/
     agregarDato(contenido, "Categoría", destino.categoria);
     agregarDato(contenido, "Descripción", destino.descripcion);
-    agregarDato(contenido, "Horario", destino.horario);
     agregarDato(contenido, "Clima", destino.clima);
-    agregarDato(contenido, "Estado", destino.estado);
+    agregarDato(contenido, "Actividades", destino.actividades);
+    agregarDato(contenido, "Horario", destino.horario);
+    agregarDato(contenido, "Reserva anticipada", destino["reserva anticipada"]);
+
+    if (/^https?:\/\//i.test(destino.url || "")) {
+        const enlace = document.createElement("a");
+        enlace.href = destino.url;
+        enlace.target = "_blank";
+        enlace.rel = "noopener noreferrer";
+        enlace.textContent = "Reserva acá";
+        contenido.append(enlace);
+    }
 
     tarjeta.append(ubicacion, espacioImagen, contenido);
     return tarjeta;
