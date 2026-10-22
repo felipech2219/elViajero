@@ -31,9 +31,14 @@ main {
     flex: 1;
 }
 
+div > h2 {
+    text-align: center;
+}
+
 footer {
     padding: 20px;
     padding-top: 80px;
+    text-align: left;
 }
 
 footer a {
@@ -93,7 +98,58 @@ nav a:hover {
     color: #555;
 }
 
+/*tarjetas*/
+.tarjetaAll {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.tarjetaAll > article {
+    overflow: hidden;
+    background: #FFFFFF;
+    border: 1px solid #d9e2dd;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+}
+
+.destination-card__image {
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #D8F3DC;
+    color: #2D6A4F;
+}
+
+.destination-card__content {
+    padding: 20px;
+}
+
+.destination-card__content h3 {
+    margin: 8px 0;
+}
+
+.destination-card__location {
+    margin: 0;
+    color: #555;
+    font-size: .9rem;
+}
+
 section {
     margin-bottom: 60px;
 }
 
+.tarjetAll > article {
+    transition: transform 0.3s ease;
+}
+
+.tarjetAll > article:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 20px;
+    }
+}
