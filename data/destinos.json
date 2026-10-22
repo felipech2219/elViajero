@@ -1,0 +1,14 @@
+[
+    {
+    "id": 1,
+    "nombre": "Volcán Arenal",
+    "categoria": "Volcanes",
+    "descripcion": "Uno de los volcanes más visitados de Costa Rica.",
+    "ubicacion": "La Fortuna, San Carlos",
+    "horario": "08:00 AM - 05:00 PM",
+    "clima": "Tropical",
+    "estado": "Disponible",
+    "imagen": "img/volcan-arenal.jpg"
+    }
+]
+
