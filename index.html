@@ -2,67 +2,90 @@
 <html lang="es">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>elViajero | Descubre Costa Rica</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="js/script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" 
+    content="elViajero es una plataforma web para descubrir destinos y experiencias de viaje en Costa Rica.">
+
+    <meta name="keywords" content="viajes, Costa Rica, destinos, parques nacionales, playas, montañas, turismo">
+    <meta name="author" content="elViajero">
+    <link rel="stylesheet" href="css/style.css">
+    <title>elViajero | Inicio</title>
 </head>
 
 <body>
-    <div>
-        <header data-purpose="site-header">
-            <a class="site-logo" href="#" aria-label="elViajero, inicio">
-                el<span>Viajero</span>
-            </a>
-            <nav aria-label="Navegación principal" data-purpose="header-navigation">
-                <a href="inicio">Inicio</a>
-                <a href="destinos">Destinos</a>
-                <a href="favoritos">Favoritos</a>
-            </nav>
-        </header>
+    <!-- Encabezado del sitio -->
+    <header class="site-header">
+        <div class="container header-content">
+            <p class="logo"><strong>el<span>Viajero</span></strong></p>
 
-        <main>
-            <section aria-labelledby="section-title" data-purpose="costa-rica-features" id="destinos">
+            <nav class="main-nav" aria-label="Navegación principal">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="destinos">Destinos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <!-- Sección de destinos cargados desde JSON -->
+        <section id="destinos" aria-labelledby="section-title">
+            <div class="container">
                 <div class="section-heading">
-                    <h2 id="section-title">Lo que no puedes perderte de Costa Rica</h2>
+                    <h1 id="section-title">Lo que no puedes perderte de Costa Rica</h1>
                     <p>
                         Sumérgete en el pura vida: volcanes, playas y montañas increíbles.
                     </p>
                 </div>
-                <div class="tarjetaAll" aria-live="polite" aria-busy="true">
+
+                <div class="events-grid" aria-live="polite" aria-busy="true">
                     <p>Cargando destinos...</p>
                 </div>
-
-            </section>
-
-            <section aria-labelledby="about-title" data-purpose="about-us-section" id="quienes-somos">
-                <div class="about-heading">
-                    <h2 id="about-title">¿Quiénes Somos?</h2>
-                    <div aria-hidden="true"></div>
-                </div>
-                <div class="about-card" data-purpose="about-card">
-                    <div>
-                        <h3>Somos viajeros apasionados por conectar personas con destinos inolvidables</h3>
-                        <p>
-                            Explora la riqueza natural de nuestro país a través de parques nacionales, montañas y playas espectaculares. 
-                            Nuestro objetivo es brindarte información útil y actualizada para que planifiques tu próxima aventura y disfrutes 
-                            experiencias inolvidables en cada rincón de Costa Rica.
-                        </p>
-                        <div class="about-highlight">
-                            <p><strong>Comprometidos con el turismo responsable y el amor por la naturaleza</strong></p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer data-purpose="site-footer">
-            <div>
-                <a href="#">Contacto</a>
             </div>
-            <p><strong>2026 elViajero</strong></p>
-        </footer>
-    </div>
+        </section>
+
+        <!-- Información general de la plataforma -->
+        <section id="quienes-somos" aria-labelledby="about-title">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 id="about-title">¿Quiénes Somos?</h2>
+                </div>
+
+                <div class="about-card">
+                    <h3>Somos viajeros apasionados por conectar personas con destinos inolvidables</h3>
+                    <p>
+                        Explora la riqueza natural de nuestro país a través de parques nacionales, montañas
+                        y playas espectaculares. Nuestro objetivo es brindarte información útil y actualizada
+                        para que planifiques tu próxima aventura y disfrutes experiencias inolvidables en cada
+                        rincón de Costa Rica.
+                    </p>
+                    <p>
+                        <strong>Comprometidos con el turismo responsable y el amor por la naturaleza</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer id="contacto">
+        <div class="container">
+            <h5>Contacto</h5>
+            <address>
+                elViajero<br>
+                Correo: contacto@elviajero.cr<br>
+                Costa Rica
+            </address>
+            <p>
+                <small>&copy; 2026 elViajero. Todos los derechos reservados.</small>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Script al final del body: la página ya está creada al 100% -->
+    <script src="js/script.js"></script>
 </body>
+
 </html>

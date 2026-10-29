@@ -1,0 +1,322 @@
+/* =========================
+1. CSS BASE
+Reglas generales del sitio
+========================= */
+
+/* Elimina márgenes y espacios automáticos del navegador */
+* {
+    margin: 0;
+    padding: 0;
+
+    /* Hace que padding y border no aumenten el tamaño real */
+    box-sizing: border-box;
+}
+
+/* Configuración general del documento */
+html {
+
+    /* Tamaño base para usar rem */
+    font-size: 16px;
+
+    /* Hace suave el desplazamiento entre anclas */
+    scroll-behavior: smooth;
+}
+
+/* Estilo general del sitio */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f8;
+    color: #1f2937;
+
+    /* Mejora separación entre líneas */
+    line-height: 1.6;
+
+    /* Permite que el footer quede al final en páginas cortas */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hace multimedia adaptable al ancho del contenedor */
+img,
+video,
+iframe {
+    max-width: 100%;
+}
+
+/* Evita deformación y espacios extra debajo de imágenes */
+img {
+    height: auto;
+    display: block;
+}
+
+/* Quita subrayado predeterminado */
+a {
+    text-decoration: none;
+}
+
+/* =========================
+UTILIDADES GENERALES
+========================= */
+
+/* Contenedor reutilizable para centrar contenido */
+.container {
+    width: 90%;
+
+    /* Limita el ancho máximo en pantallas grandes */
+    max-width: 1100px;
+
+    /* Centra horizontalmente */
+    margin: 0 auto;
+}
+
+/* Espaciado vertical general */
+section {
+    padding: 40px 0;
+}
+
+/* Estilo base para títulos */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #1b4332;
+    margin-bottom: 15px;
+}
+
+/* Separación entre párrafos */
+p {
+    margin-bottom: 15px;
+}
+
+/* =========================
+HEADER
+========================= */
+
+.site-header {
+    background-color: #2d6a4f;
+    color: white;
+    padding: 18px 0;
+    border-bottom: 4px solid #e9c46a;
+}
+
+/*
+flex:
+organiza el logo y el menú en horizontal
+*/
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 1.4rem;
+    margin-bottom: 0;
+
+    /* Evita que el logo se divida en dos líneas */
+    white-space: nowrap;
+}
+
+.logo span {
+    color: #e9c46a;
+}
+
+/* =========================
+NAVEGACIÓN
+========================= */
+
+/* Quita viñetas del menú */
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.main-nav a {
+    color: white;
+    font-weight: bold;
+    padding: 8px 10px;
+    border-radius: 6px;
+
+    /* Permite tratar el enlace como bloque pequeño */
+    display: inline-block;
+}
+
+/* Cambio visual al pasar mouse */
+.main-nav a:hover {
+    background-color: #e9c46a;
+    color: #2d6a4f;
+}
+
+/* =========================
+CONTENIDO PRINCIPAL
+========================= */
+
+/* El contenido crece para empujar el footer hacia abajo */
+main {
+    flex: 1;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-heading p {
+    color: #555;
+}
+
+/* =========================
+SECCIÓN DESTINOS
+========================= */
+
+/*
+grid:
+organiza las tarjetas y las adapta al ancho disponible
+*/
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 320px));
+    justify-content: center;
+    gap: 24px;
+}
+
+.event-card {
+    background-color: white;
+    border: 1px solid #d9e2dd;
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    /* Animación suave al pasar el mouse */
+    transition: transform 0.3s ease;
+}
+
+.event-card:hover {
+    transform: scale(1.05);
+}
+
+.event-card__image {
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d8f3dc;
+    color: #2d6a4f;
+}
+
+.event-card__image img {
+    width: 100%;
+    height: 180px;
+
+    /* Ajusta imagen sin deformarla */
+    object-fit: cover;
+}
+
+.event-card__location {
+    margin: 0;
+    padding: 12px 20px;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.event-card__content {
+    padding: 20px;
+}
+
+.event-card__content h3 {
+    margin: 8px 0;
+}
+
+/* =========================
+SECCIÓN QUIÉNES SOMOS
+========================= */
+
+.about-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+    /* Cambio suave de color al pasar el mouse */
+    transition: background-color 0.3s ease;
+}
+
+.about-card:hover {
+    background-color: #d8f3dc;
+}
+
+/* =========================
+FOOTER
+========================= */
+
+footer {
+    background-color: #2d6a4f;
+    color: white;
+    padding: 35px 0;
+}
+
+footer a {
+    color: #e9c46a;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer ul {
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+footer address {
+    font-style: normal;
+    margin-bottom: 15px;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+/*
+Cambios para pantallas pequeñas
+*/
+@media (max-width: 768px) {
+
+    /*
+    Menú vertical
+    */
+    .header-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .main-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* Ajustes para teléfonos angostos */
+@media (max-width: 420px) {
+    .logo {
+        font-size: 1.15rem;
+    }
+
+    .section-heading h1 {
+        font-size: 1.75rem;
+    }
+
+    .event-card__content {
+        padding: 18px;
+    }
+}

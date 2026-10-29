@@ -10,7 +10,7 @@
     "horario": "7:00am - 4:00pm",
     "reserva anticipada": "Si",
     "url": "https://serviciosenlinea.sinac.go.cr/",
-    "imagen": "img/manuelAntonio.png"
+    "imagen": "images/manuelAntonio.png"
     },
 
     {
@@ -24,7 +24,7 @@
     "horario": "8:00am - 4:00pm",
     "reserva anticipada": "No",
     "url": "",
-    "imagen": "img/volcanArenal.png"
+    "imagen": "images/volcanArenal.png"
     },
 
     {
@@ -38,7 +38,7 @@
     "horario": "4:00am - 5:00pm",
     "reserva anticipada": "Si",
     "url": "https://serviciosenlinea.sinac.go.cr/",
-    "imagen": "img/cerroChirripo.png"
+    "imagen": "images/cerroChirripo.png"
     },
 
     {
@@ -52,7 +52,7 @@
     "horario": "7:00am - 4:00pm",
     "reserva anticipada": "Si",
     "url": "https://serviciosenlinea.sinac.go.cr/",
-    "imagen": "img/corcovado.png"
+    "imagen": "images/corcovado.png"
     },
 
     {
@@ -66,7 +66,7 @@
     "horario": "Acceso libre",
     "reserva anticipada": "No",
     "url": "",
-    "imagen": "img/playaTamarindo.png"
+    "imagen": "images/playaTamarindo.png"
     }
 ]
 

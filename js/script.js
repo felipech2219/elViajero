@@ -1,5 +1,17 @@
-const contenedorDestinos = document.querySelector(".tarjetaAll");
+/* =========================
+1. REFERENCIAS DEL DOM
+========================= */
 
+const contenedorDestinos = document.querySelector(".events-grid");
+
+/* =========================
+2. FUNCIONES
+========================= */
+
+/*
+Agrega un párrafo con un dato del destino.
+Si el valor está vacío, no agrega nada.
+*/
 function agregarDato(contenido, etiqueta, valor) {
     if (valor === undefined || valor === null || String(valor).trim() === "") {
         return;
@@ -10,15 +22,20 @@ function agregarDato(contenido, etiqueta, valor) {
     contenido.append(dato);
 }
 
+/*
+Crea una tarjeta de destino con su imagen,
+ubicación y datos principales.
+*/
 function crearTarjeta(destino) {
     const tarjeta = document.createElement("article");
+    tarjeta.className = "event-card";
 
     const ubicacion = document.createElement("p");
-    ubicacion.className = "destination-card__location";
+    ubicacion.className = "event-card__location";
     ubicacion.textContent = destino.ubicacion || "Ubicación no disponible";
 
     const espacioImagen = document.createElement("div");
-    espacioImagen.className = "destination-card__image";
+    espacioImagen.className = "event-card__image";
 
     if (destino.imagen) {
         const imagen = document.createElement("img");
@@ -36,13 +53,12 @@ function crearTarjeta(destino) {
     }
 
     const contenido = document.createElement("div");
-    contenido.className = "destination-card__content";
+    contenido.className = "event-card__content";
 
     const nombre = document.createElement("h3");
     nombre.textContent = destino.nombre || "Destino sin nombre";
     contenido.append(nombre);
 
-    /*agregarDato(contenido, "ID", destino.id);*/
     agregarDato(contenido, "Categoría", destino.categoria);
     agregarDato(contenido, "Descripción", destino.descripcion);
     agregarDato(contenido, "Clima", destino.clima);
@@ -63,10 +79,14 @@ function crearTarjeta(destino) {
     return tarjeta;
 }
 
+/*
+Carga los destinos desde el archivo JSON
+y los muestra en pantalla dinámicamente.
+*/
 async function cargarDestinos() {
     try {
         if (!contenedorDestinos) {
-            throw new Error('No se encontró el contenedor ".tarjetaAll" en el HTML.');
+            throw new Error('No se encontró el contenedor ".events-grid" en el HTML.');
         }
 
         const respuesta = await fetch("./data/destinos.json");
@@ -99,5 +119,9 @@ async function cargarDestinos() {
         }
     }
 }
+
+/* =========================
+3. INICIO
+========================= */
 
 cargarDestinos();

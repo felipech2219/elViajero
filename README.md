@@ -4,6 +4,21 @@ elViajero: plataforma web para descubrir destinos y experiencias de viaje
 # Estado 
 En desarrollo 
 
+# Estructura del proyecto
+```
+elViajero/
+├── index.html          # Página principal
+├── css/
+│   └── style.css       # Hoja de estilos del sitio
+├── js/
+│   └── script.js       # Lógica JavaScript
+├── assets/
+│   └── images/         # Imágenes del sitio
+├── data/
+│   └── destinos.json   # Datos de destinos (JSON)
+└── docs/               # Documentación del curso
+```
+
 # Cómo ejecutar el proyecto
 El proyecto es una página estática (`index.html`), por lo que no requiere instalar dependencias.
 
