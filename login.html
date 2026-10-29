@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lan="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingreso Admin | elViajero</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="fondo-login">
+  <main class="tarjeta">
+    <h1>el<span>Viajero</span></h1>
+    <p>Ingresa con tu usuario</p>
+    <form id="formLogin">
+      <label for="usuario">Usuario</label>
+      <input type="text" id="usuario" required>
+
+      <label for="clave">Contraseña</label>
+      <input type="password" id="clave" required>
+
+      <label class="check">
+        <input type="checkbox" id="recordarme"> Recordar mi usuario
+      </label>
+
+      <p id="mensaje" class="mensaje"></p>
+      <button type="submit">Ingresar</button>
+    </form>
+  </main>
+  <script src="js/utilidades.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

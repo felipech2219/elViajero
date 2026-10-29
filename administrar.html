@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+    content="Panel de administración de elViajero para gestionar los destinos turísticos de Costa Rica.">
+
+    <meta name="keywords" content="viajes, Costa Rica, destinos, administración, turismo">
+    <meta name="author" content="elViajero">
+    <link rel="stylesheet" href="css/style.css">
+    <title>elViajero | Administrar Destinos</title>
+</head>
+
+<body>
+    <!-- Encabezado del sitio: solo opción de cerrar sesión -->
+    <header class="site-header">
+        <div class="container header-content">
+            <p class="logo"><strong>el<span>Viajero</span></strong></p>
+
+            <nav class="main-nav" aria-label="Navegación de administración">
+                <ul>
+                    <li><a href="index.html" id="cerrar-sesion">Cerrar sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <!-- Panel de administración de destinos -->
+        <section id="administrar" aria-labelledby="admin-title">
+            <div class="container">
+                <div class="section-heading">
+                    <h1 id="admin-title">Panel de Administración</h1>
+                    <p>
+                        Gestiona los destinos turísticos disponibles en la plataforma.
+                    </p>
+                </div>
+
+                <!-- Controles de búsqueda y filtro por categoría -->
+                <div class="admin-controls">
+                    <input
+                        type="search"
+                        id="buscar"
+                        placeholder="Buscar destino por nombre..."
+                        aria-label="Buscar destino por nombre">
+                    <select id="filtro-categoria" aria-label="Filtrar por categoría">
+                        <option value="todas">Todas las categorías</option>
+                    </select>
+                </div>
+
+                <div class="events-grid" id="events-grid" aria-live="polite" aria-busy="true">
+                    <p>Cargando destinos...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <p>
+                <small>&copy; 2026 elViajero. Todos los derechos reservados.</small>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/administrar.js"></script>
+</body>
+
+</html>

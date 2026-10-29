@@ -282,8 +282,85 @@ footer address {
     margin-bottom: 15px;
 }
 
+.admin-area p {
+    margin-bottom: 5px;
+}
+
+.admin-link {
+    display: inline-block;
+    margin-top: 0;
+    padding: 8px 10px;
+    border-radius: 6px;
+}
+
+/* Mismo efecto hover de los enlaces del menú */
+.admin-link:hover {
+    background-color: #e9c46a;
+    color: #2d6a4f;
+    text-decoration: none;
+}
+
 /* =========================
-9. RESPONSIVE
+9. PANEL DE ADMINISTRACIÓN
+========================= */
+
+/* Buscador y filtro de categoría centrados */
+.admin-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.admin-controls input,
+.admin-controls select {
+    padding: 10px 12px;
+    border: 1px solid #d9e2dd;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: white;
+    color: #1f2937;
+}
+
+.admin-controls input {
+    flex: 1;
+    min-width: 220px;
+    max-width: 400px;
+}
+
+.admin-controls input:focus,
+.admin-controls select:focus {
+    outline: 2px solid #2d6a4f;
+    border-color: #2d6a4f;
+}
+
+/* Botón editar de cada tarjeta */
+.btn-editar {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #2d6a4f;
+    color: white;
+    font-weight: bold;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+
+    /* Cambio suave de color al pasar el mouse */
+    transition: background-color 0.3s ease;
+}
+
+.btn-editar:hover {
+    background-color: #e9c46a;
+    color: #2d6a4f;
+}
+
+/* =========================
+10. RESPONSIVE
 ========================= */
 
 /*
