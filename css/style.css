@@ -1,25 +1,10 @@
-/* =========================
-1. CSS BASE
-Reglas generales del sitio
-========================= */
-
-/* Elimina márgenes y espacios automáticos del navegador */
+﻿/* Elimina márgenes y espacios automáticos del navegador */
 * {
     margin: 0;
     padding: 0;
 
     /* Hace que padding y border no aumenten el tamaño real */
     box-sizing: border-box;
-}
-
-/* Configuración general del documento */
-html {
-
-    /* Tamaño base para usar rem */
-    font-size: 16px;
-
-    /* Hace suave el desplazamiento entre anclas */
-    scroll-behavior: smooth;
 }
 
 /* Estilo general del sitio */
@@ -37,12 +22,6 @@ body {
     flex-direction: column;
 }
 
-/* Hace multimedia adaptable al ancho del contenedor */
-img,
-video,
-iframe {
-    max-width: 100%;
-}
 
 /* Evita deformación y espacios extra debajo de imágenes */
 img {
@@ -54,10 +33,6 @@ img {
 a {
     text-decoration: none;
 }
-
-/* =========================
-UTILIDADES GENERALES
-========================= */
 
 /* Contenedor reutilizable para centrar contenido */
 .container {
@@ -75,12 +50,32 @@ section {
     padding: 40px 0;
 }
 
-/* Estilo base para títulos */
-h1,
-h2,
-h3,
-h4,
-h5,
+/* Estilo base para títulos: cada uno se cambia por separado */
+h1 {
+    color: #1b4332;
+    margin-bottom: 15px;
+}
+
+h2 {
+    color: #1b4332;
+    margin-bottom: 15px;
+}
+
+h3 {
+    color: #1b4332;
+    margin-bottom: 15px;
+}
+
+h4 {
+    color: #1b4332;
+    margin-bottom: 15px;
+}
+
+h5 {
+    color: #1b4332;
+    margin-bottom: 15px;
+}
+
 h6 {
     color: #1b4332;
     margin-bottom: 15px;
@@ -92,7 +87,7 @@ p {
 }
 
 /* =========================
-HEADER
+3. HEADER
 ========================= */
 
 .site-header {
@@ -126,7 +121,7 @@ organiza el logo y el menú en horizontal
 }
 
 /* =========================
-NAVEGACIÓN
+4. NAVEGACIÓN
 ========================= */
 
 /* Quita viñetas del menú */
@@ -154,7 +149,7 @@ NAVEGACIÓN
 }
 
 /* =========================
-CONTENIDO PRINCIPAL
+5. CONTENIDO PRINCIPAL
 ========================= */
 
 /* El contenido crece para empujar el footer hacia abajo */
@@ -172,7 +167,7 @@ main {
 }
 
 /* =========================
-SECCIÓN DESTINOS
+6. SECCIÓN DESTINOS
 ========================= */
 
 /*
@@ -236,7 +231,7 @@ organiza las tarjetas y las adapta al ancho disponible
 }
 
 /* =========================
-SECCIÓN QUIÉNES SOMOS
+7. SECCIÓN QUIÉNES SOMOS
 ========================= */
 
 .about-card {
@@ -255,7 +250,7 @@ SECCIÓN QUIÉNES SOMOS
 }
 
 /* =========================
-FOOTER
+8. FOOTER
 ========================= */
 
 footer {
@@ -273,6 +268,10 @@ footer a:hover {
     text-decoration: underline;
 }
 
+footer h5 {
+    color: #e9c46a;
+}
+
 footer ul {
     list-style: none;
     margin-bottom: 15px;
@@ -284,7 +283,7 @@ footer address {
 }
 
 /* =========================
-RESPONSIVE
+9. RESPONSIVE
 ========================= */
 
 /*
