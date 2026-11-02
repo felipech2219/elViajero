@@ -1,5 +1,27 @@
+/*
+JS compartido por destino y administrar
+Ambas páginas cargan y muestran los destinos desde el JSON
+con buscador y filtro por categoría. Las diferencias de cada
+página se detectan por los elementos que existen en el DOM:
+- administrar.html: protege la sesión y agrega botón Editar.
+- destino.html: agrega enlace de reserva y contador de resultados.
+*/
+
 /* =========================
-1. REFERENCIAS DEL DOM
+1. PROTECCIÓN DE SESIÓN
+(solo aplica en administrar.html)
+========================= */
+
+const enlaceCerrarSesion = document.getElementById("cerrar-sesion");
+
+// Si la página tiene enlace de cerrar sesión y no hay
+// sesión activa, no se muestra el panel
+if (enlaceCerrarSesion && !sessionStorage.getItem("sesion")) {
+    window.location.replace("login.html");
+}
+
+/* =========================
+2. REFERENCIAS DEL DOM
 ========================= */
 
 const contenedorDestinos = document.getElementById("events-grid");
@@ -11,7 +33,7 @@ const contadorResultados = document.getElementById("resultados");
 let destinos = [];
 
 /* =========================
-2. FUNCIONES
+3. FUNCIONES
 ========================= */
 
 /*
@@ -29,8 +51,18 @@ function agregarDato(contenido, etiqueta, valor) {
 }
 
 /*
+Acción del botón Editar de cada tarjeta.
+Por ahora muestra qué destino se va a editar.
+*/
+function editarDestino(destino) {
+    alert(`Editar destino: ${destino.nombre}\n\nLa edición de destinos estará disponible próximamente.`);
+}
+
+/*
 Crea una tarjeta de destino con su imagen,
-ubicación, datos principales y enlace de reserva.
+ubicación y datos principales. En administrar.html
+agrega el botón Editar; en destino.html agrega
+el enlace de reserva.
 */
 function crearTarjeta(destino) {
     const tarjeta = document.createElement("article");
@@ -72,7 +104,16 @@ function crearTarjeta(destino) {
     agregarDato(contenido, "Horario", destino.horario);
     agregarDato(contenido, "Reserva anticipada", destino["reserva anticipada"]);
 
-    if (/^https?:\/\//i.test(destino.url || "")) {
+    if (enlaceCerrarSesion) {
+        // Página de administración: botón Editar
+        const botonEditar = document.createElement("button");
+        botonEditar.type = "button";
+        botonEditar.className = "btn-editar";
+        botonEditar.textContent = "Editar";
+        botonEditar.addEventListener("click", () => editarDestino(destino));
+        contenido.append(botonEditar);
+    } else if (/^https?:\/\//i.test(destino.url || "")) {
+        // Página pública: enlace de reserva
         const enlace = document.createElement("a");
         enlace.href = destino.url;
         enlace.target = "_blank";
@@ -114,9 +155,11 @@ function mostrarDestinos() {
         return coincideTexto && coincideCategoria;
     });
 
-    contadorResultados.textContent = filtrados.length === 1
-        ? "1 destino encontrado"
-        : `${filtrados.length} destinos encontrados`;
+    if (contadorResultados) {
+        contadorResultados.textContent = filtrados.length === 1
+            ? "1 destino encontrado"
+            : `${filtrados.length} destinos encontrados`;
+    }
 
     contenedorDestinos.replaceChildren();
     if (filtrados.length === 0) {
@@ -156,14 +199,21 @@ async function cargarDestinos() {
 }
 
 /* =========================
-3. EVENTOS
+4. EVENTOS
 ========================= */
 
 campoBuscar.addEventListener("input", mostrarDestinos);
 filtroCategoria.addEventListener("change", mostrarDestinos);
 
+if (enlaceCerrarSesion) {
+    // Cerrar sesión: se limpia la sesión y se vuelve al inicio
+    enlaceCerrarSesion.addEventListener("click", () => {
+        sessionStorage.removeItem("sesion");
+    });
+}
+
 /* =========================
-4. INICIO
+5. INICIO
 ========================= */
 
 cargarDestinos();
