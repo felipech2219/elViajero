@@ -10,6 +10,10 @@ const campoClave = document.getElementById("clave");
 const chkRecordar = document.getElementById("recordarme");
 const mensaje = document.getElementById("mensaje");
 
+/*mensaje error login*/ 
+const errorUsuario = document.getElementById("errorUsuario");
+const errorClave = document.getElementById("errorClave");
+
 // 1) Si ya hay una sesión activa, no tiene sentido mostrar el login
 if (sessionStorage.getItem("sesion")) {
   window.location.replace("administrar.html");
@@ -22,9 +26,35 @@ if (recordado) {
   chkRecordar.checked = true;
 }
 
+// 2b) Los mensajes de error se limpian mientras el usuario escribe
+campoUsuario.addEventListener("input", function () {
+  errorUsuario.textContent = "";
+});
+
+campoClave.addEventListener("input", function () {
+  errorClave.textContent = "";
+});
+
 // 3) Al enviar el formulario
 form.addEventListener("submit", function (evento) {
   evento.preventDefault();
+
+  // Validar que ningún campo esté vacío
+  let valido = true;
+
+  if (campoUsuario.value.trim() === "") {
+    errorUsuario.textContent = "Debe ingresar un nombre de usuario.";
+    valido = false;
+  }
+
+  if (campoClave.value.trim() === "") {
+    errorClave.textContent = "Debe ingresar una contraseña.";
+    valido = false;
+  }
+
+  if (!valido) {
+    return;
+  }
 
     const encontrado = USUARIOS.find(function (u) {
     return u.usuario === campoUsuario.value.trim() && u.clave === campoClave.value;

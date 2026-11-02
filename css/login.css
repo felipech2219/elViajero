@@ -101,3 +101,14 @@ button:hover {
     background-color: #e9c46a;
     color: #2d6a4f;
 }
+
+/*
+embellecer error
+*/
+.error {
+    display:block;
+    color:#d62828;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    min-height: 18px;
+}

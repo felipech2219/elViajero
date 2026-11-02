@@ -12,10 +12,12 @@
     <p>Ingresa con tu usuario</p>
     <form id="formLogin">
       <label for="usuario">Usuario</label>
-      <input type="text" id="usuario" required>
+      <input type="text" id="usuario">
+      <small class="error" id="errorUsuario"></small>
 
       <label for="clave">Contraseña</label>
-      <input type="password" id="clave" required>
+      <input type="password" id="clave">
+      <small class="error" id="errorClave"></small>
 
       <label class="check">
         <input type="checkbox" id="recordarme"> Recordar mi usuario
