@@ -148,6 +148,12 @@ organiza el logo y el menú en horizontal
     color: #2d6a4f;
 }
 
+/* Indica cuál página está activa en el menú */
+.main-nav a[aria-current="page"] {
+    background-color: #e9c46a;
+    color: #2d6a4f;
+}
+
 /* =========================
 5. CONTENIDO PRINCIPAL
 ========================= */

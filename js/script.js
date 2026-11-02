@@ -120,8 +120,5 @@ async function cargarDestinos() {
     }
 }
 
-/* =========================
-3. INICIO
-========================= */
 
 cargarDestinos();

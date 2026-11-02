@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+    content="Explora los destinos turísticos de Costa Rica con elViajero: busca por nombre y filtra por categoría.">
+
+    <meta name="keywords" content="viajes, Costa Rica, destinos, parques nacionales, playas, montañas, turismo">
+    <meta name="author" content="elViajero">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/destino.css">
+    <title>elViajero | Destinos</title>
+</head>
+
+<body>
+    <!-- Encabezado del sitio -->
+    <header class="site-header">
+        <div class="container header-content">
+            <p class="logo"><strong>el<span>Viajero</span></strong></p>
+
+            <nav class="main-nav" aria-label="Navegación principal">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="destino.html" aria-current="page">Destinos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    
+    <main>
+        <!-- destinos con buscador y filtro -->
+        <section id="destinos" aria-labelledby="section-title">
+            <div class="container">
+                <div class="section-heading">
+                    <h1 id="section-title">Destinos de Costa Rica</h1>
+                    <p>
+                        Busca por nombre o filtra por categoría para encontrar tu próxima aventura.
+                    </p>
+                </div>
+
+                <!-- controles de búsqueda y filtro categoría -->
+                <div class="destino-controls">
+                    <input
+                        type="search"
+                        id="buscar"
+                        placeholder="Buscar destino por nombre..."
+                        aria-label="Buscar destino por nombre">
+                    <select id="filtro-categoria" aria-label="Filtrar por categoría">
+                        <option value="todas">Todas las categorías</option>
+                    </select>
+                </div>
+
+                <p id="resultados" class="resultados-contador" aria-live="polite"></p>
+
+                <div class="events-grid" id="events-grid" aria-live="polite" aria-busy="true">
+                    <p>Cargando destinos...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- pie de página -->
+    <footer>
+        <div class="container">
+            <p>
+                <small>&copy; 2026 elViajero. Todos los derechos reservados.</small>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/destino.js"></script>
+</body>
+
+</html>

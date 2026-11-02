@@ -1,0 +1,81 @@
+/* =========================
+Estilos de la página Destinos
+(complementa a style.css)
+========================= */
+
+/* Buscador y filtro de categoría centrados */
+.destino-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.destino-controls input[type="search"],
+.destino-controls select {
+    padding: 10px 12px;
+    border: 1px solid #d9e2dd;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: white;
+    color: #1f2937;
+}
+
+.destino-controls input[type="search"] {
+    flex: 1;
+    min-width: 220px;
+    max-width: 400px;
+}
+
+.destino-controls input[type="search"]:focus,
+.destino-controls select:focus {
+    outline: 2px solid #2d6a4f;
+    border-color: #2d6a4f;
+}
+
+/* Contador de resultados de la búsqueda */
+.resultados-contador {
+    text-align: center;
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+}
+
+/* Enlace de reserva dentro de la tarjeta */
+.event-card__content a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #2d6a4f;
+    color: white;
+    font-weight: bold;
+    font-size: 0.95rem;
+    border-radius: 6px;
+
+    /* Cambio suave de color al pasar el mouse */
+    transition: background-color 0.3s ease;
+}
+
+.event-card__content a:hover {
+    background-color: #e9c46a;
+    color: #2d6a4f;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+/* Controles en columna para pantallas pequeñas */
+@media (max-width: 768px) {
+    .destino-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .destino-controls input[type="search"] {
+        max-width: none;
+    }
+}
