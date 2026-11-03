@@ -42,14 +42,19 @@
 
                 <!-- controles de búsqueda y filtro categoría -->
                 <div class="destino-controls">
-                    <input
-                        type="search"
-                        id="buscar"
-                        placeholder="Buscar destino por nombre..."
-                        aria-label="Buscar destino por nombre">
-                    <select id="filtro-categoria" aria-label="Filtrar por categoría">
-                        <option value="todas">Todas las categorías</option>
-                    </select>
+                    <div class="control-grupo">
+                        <label for="buscar">Buscar destino:</label>
+                        <input
+                            type="search"
+                            id="buscar"
+                            placeholder="Buscar por nombre...">
+                    </div>
+                    <div class="control-grupo">
+                        <label for="filtro-categoria">Categoría:</label>
+                        <select id="filtro-categoria">
+                            <option value="todas">Todas las categorías</option>
+                        </select>
+                    </div>
                 </div>
 
                 <p id="resultados" class="resultados-contador" aria-live="polite"></p>

@@ -43,13 +43,13 @@ function agregarDato(contenido, etiqueta, valor) {
     contenido.append(dato);
 }
 
-/* -------- Edición y eliminación (solo administrar.html) -------- */
+/*edición/eliminación */
 
 // Claves de localStorage donde se guardan las ediciones y eliminaciones
 const CLAVE_EDICIONES = "destinosEditados";
 const CLAVE_ELIMINADOS = "destinosEliminados";
 
-// Campos que se muestran bloqueados (solo lectura) en el formulario
+// solo lectura
 const CAMPOS_BLOQUEADOS = [
     { clave: "id", etiqueta: "ID" },
     { clave: "nombre", etiqueta: "Nombre" },

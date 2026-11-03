@@ -7,14 +7,33 @@ Estilos de la página Destinos
 .destino-controls {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 16px;
     margin-bottom: 20px;
+}
+
+.destino-controls .control-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.destino-controls .control-grupo:first-child {
+    flex: 1;
+    min-width: 220px;
+    max-width: 400px;
+}
+
+.destino-controls label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #1b4332;
 }
 
 .destino-controls input[type="search"],
 .destino-controls select {
+    width: 100%;
     padding: 10px 12px;
     border: 1px solid #d9e2dd;
     border-radius: 6px;
@@ -22,12 +41,6 @@ Estilos de la página Destinos
     font-family: inherit;
     background-color: white;
     color: #1f2937;
-}
-
-.destino-controls input[type="search"] {
-    flex: 1;
-    min-width: 220px;
-    max-width: 400px;
 }
 
 .destino-controls input[type="search"]:focus,

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <!-- Encabezado del sitio: solo opción de cerrar sesión -->
+    <!-- Encabezado -->
     <header class="site-header">
         <div class="container header-content">
             <p class="logo"><strong>el<span>Viajero</span></strong></p>
@@ -26,7 +26,6 @@
         </div>
     </header>
 
-    <!-- Contenido principal -->
     <main>
         <!-- Panel de administración de destinos -->
         <section id="administrar" aria-labelledby="admin-title">
@@ -40,17 +39,22 @@
 
                 <!-- Controles de búsqueda y filtro por categoría -->
                 <div class="admin-controls">
-                    <input
-                        type="search"
-                        id="buscar"
-                        placeholder="Buscar destino por nombre..."
-                        aria-label="Buscar destino por nombre">
-                    <select id="filtro-categoria" aria-label="Filtrar por categoría">
-                        <option value="todas">Todas las categorías</option>
-                    </select>
+                    <div class="control-grupo">
+                        <label for="buscar">Buscar destino:</label>
+                        <input
+                            type="search"
+                            id="buscar"
+                            placeholder="Buscar por nombre...">
+                    </div>
+                    <div class="control-grupo">
+                        <label for="filtro-categoria">Categoría:</label>
+                        <select id="filtro-categoria">
+                            <option value="todas">Todas las categorías</option>
+                        </select>
+                    </div>
                 </div>
 
-                <!-- Botón para restaurar datos originales del JSON -->
+                <!-- Botón restaurar datos JSON -->
                 <div class="admin-acciones-globales">
                     <button type="button" id="btn-restablecer" class="btn-restablecer">
                         Restablecer destinos originales del JSON
@@ -64,7 +68,6 @@
         </section>
     </main>
 
-    <!-- Pie de página -->
     <footer>
         <div class="container">
             <p>

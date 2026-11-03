@@ -288,14 +288,33 @@ footer address {
 .admin-controls {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 16px;
     margin-bottom: 16px;
+}
+
+.admin-controls .control-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.admin-controls .control-grupo:first-child {
+    flex: 1;
+    min-width: 220px;
+    max-width: 400px;
+}
+
+.admin-controls label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #1b4332;
 }
 
 .admin-controls input,
 .admin-controls select {
+    width: 100%;
     padding: 10px 12px;
     border: 1px solid #d9e2dd;
     border-radius: 6px;
@@ -303,12 +322,6 @@ footer address {
     font-family: inherit;
     background-color: white;
     color: #1f2937;
-}
-
-.admin-controls input {
-    flex: 1;
-    min-width: 220px;
-    max-width: 400px;
 }
 
 .admin-controls input:focus,
