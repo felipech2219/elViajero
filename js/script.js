@@ -2,9 +2,6 @@
 
 const contenedorDestinos = document.querySelector(".events-grid");
 
-
-
-
 /*
 agregr un párrafo con un dato del destino.
 Si el valor está vacío, no agrega nada.
@@ -76,6 +73,19 @@ function crearTarjeta(destino) {
 }
 
 /*
+Lee del localStorage los IDs de destinos eliminados
+para no mostrarlos en la página de inicio.
+*/
+function obtenerEliminados() {
+    try {
+        return JSON.parse(localStorage.getItem("destinosEliminados")) || [];
+    } catch (error) {
+        console.error("No se pudieron leer los destinos eliminados:", error);
+        return [];
+    }
+}
+
+/*
 Aplica sobre la lista cargada del JSON las
 ediciones guardadas en localStorage desde el
 panel de administración, para que el inicio
@@ -114,24 +124,23 @@ async function cargarDestinos() {
             throw new Error("destinos.json debe contener una lista de destinos.");
         }
 
-        const destinosActualizados = aplicarEdicionesGuardadas(destinos);
+        const eliminados = obtenerEliminados();
+        const destinosDisponibles = destinos.filter(destino => !eliminados.includes(destino.id));
+        const destinosActualizados = aplicarEdicionesGuardadas(destinosDisponibles);
+
+        // En la página de inicio solo se muestran los destinos marcados como destacados
+        const destacados = destinosActualizados.filter(
+            destino => destino.destacado === true || destino.destacado === "true"
+        );
 
         contenedorDestinos.replaceChildren();
-        if (destinosActualizados.length === 0) {
-            contenedorDestinos.textContent = "No hay destinos registrados.";
+        if (destacados.length === 0) {
+            contenedorDestinos.textContent = "No hay destinos destacados en este momento.";
             return;
         }
 
-        /*destinosActualizados.forEach(destino => {
-            contenedorDestinos.append(crearTarjeta(destino));
-        });*/
-
-        const destacados = destinosActualizados.filter(
-        destino => destino.destacado === true
-        );
-
         destacados.forEach(destino => {
-        contenedorDestinos.append(crearTarjeta(destino));
+            contenedorDestinos.append(crearTarjeta(destino));
         });
 
     } catch (error) {

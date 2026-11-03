@@ -70,8 +70,7 @@ form.addEventListener("submit", function (evento) {
     usuario: encontrado.usuario,
     nombre: encontrado.nombre,
     rol: encontrado.rol,
-    horaIngreso: new Date().toLocaleString("es-CR"),
-    accesoAnterior: getCookie("ultimoAcceso") || "Primer ingreso"
+    horaIngreso: new Date().toLocaleString("es-CR")
   };
 
   // sessionStorage: sesión activa (se guarda como texto JSON)
@@ -83,9 +82,6 @@ form.addEventListener("submit", function (evento) {
   } else {
     localStorage.removeItem("usuarioRecordado");
   }
-
-  // Cookie: último acceso, vigente 7 días
-  setCookie("ultimoAcceso", datosSesion.horaIngreso, 7);
 
   window.location.href = "administrar.html";
 });

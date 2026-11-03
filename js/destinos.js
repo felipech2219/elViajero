@@ -43,10 +43,11 @@ function agregarDato(contenido, etiqueta, valor) {
     contenido.append(dato);
 }
 
-/* -------- Edición inline (solo administrar.html) -------- */
+/* -------- Edición y eliminación (solo administrar.html) -------- */
 
-// Clave de localStorage donde se guardan las ediciones
+// Claves de localStorage donde se guardan las ediciones y eliminaciones
 const CLAVE_EDICIONES = "destinosEditados";
+const CLAVE_ELIMINADOS = "destinosEliminados";
 
 // Campos que se muestran bloqueados (solo lectura) en el formulario
 const CAMPOS_BLOQUEADOS = [
@@ -55,6 +56,122 @@ const CAMPOS_BLOQUEADOS = [
     { clave: "ubicacion", etiqueta: "Ubicación" },
     { clave: "imagen", etiqueta: "Imagen" }
 ];
+
+/*
+Lee del localStorage los IDs de destinos eliminados.
+*/
+function obtenerEliminados() {
+    try {
+        return JSON.parse(localStorage.getItem(CLAVE_ELIMINADOS)) || [];
+    } catch (error) {
+        console.error("No se pudieron leer los destinos eliminados:", error);
+        return [];
+    }
+}
+
+/*
+Muestra un modal visual para confirmar la eliminación de un destino
+utilizando manipulación directa del DOM y eventos click.
+*/
+function mostrarModalEliminar(destino) {
+    const overlay = document.createElement("div");
+    overlay.className = "modal-overlay";
+
+    const caja = document.createElement("div");
+    caja.className = "modal-caja";
+
+    const titulo = document.createElement("h3");
+    titulo.textContent = "¿Eliminar destino?";
+
+    const texto = document.createElement("p");
+    const nombre = destino && destino.nombre ? destino.nombre : "este destino";
+    texto.textContent = `¿Está seguro de que desea eliminar "${nombre}"? Esta acción lo ocultará de la plataforma.`;
+
+    const acciones = document.createElement("div");
+    acciones.className = "modal-acciones";
+
+    const btnCancelar = document.createElement("button");
+    btnCancelar.type = "button";
+    btnCancelar.className = "modal-btn-cancelar";
+    btnCancelar.textContent = "Cancelar";
+    btnCancelar.addEventListener("click", function () {
+        overlay.remove();
+    });
+
+    const btnConfirmar = document.createElement("button");
+    btnConfirmar.type = "button";
+    btnConfirmar.className = "modal-btn-confirmar";
+    btnConfirmar.textContent = "Eliminar";
+    btnConfirmar.addEventListener("click", function () {
+        const idDestino = typeof destino === "object" ? destino.id : destino;
+        const eliminados = obtenerEliminados();
+        if (!eliminados.includes(idDestino)) {
+            eliminados.push(idDestino);
+            localStorage.setItem(CLAVE_ELIMINADOS, JSON.stringify(eliminados));
+        }
+
+        // Remover de la lista activa en memoria y refrescar la vista
+        destinos = destinos.filter(function (d) {
+            return d.id !== idDestino;
+        });
+
+        mostrarDestinos();
+        overlay.remove();
+    });
+
+    acciones.append(btnCancelar, btnConfirmar);
+    caja.append(titulo, texto, acciones);
+    //overlay fondo oscuro que sostiene la caja
+    overlay.append(caja);
+    document.body.append(overlay);
+}
+
+/*
+Muestra un modal visual para confirmar el restablecimiento
+de todos los destinos al estado original del archivo JSON.
+*/
+function mostrarModalRestablecer() {
+    const overlay = document.createElement("div");
+    overlay.className = "modal-overlay";
+
+    const caja = document.createElement("div");
+    caja.className = "modal-caja";
+
+    const titulo = document.createElement("h3");
+    titulo.textContent = "¿Restablecer todos los destinos?";
+
+    const texto = document.createElement("p");
+    texto.textContent = "Esta acción restaurará todas las tarjetas al estado original del archivo JSON, descartando las ediciones y eliminaciones guardadas.";
+
+    const acciones = document.createElement("div");
+    acciones.className = "modal-acciones";
+
+    const btnCancelar = document.createElement("button");
+    btnCancelar.type = "button";
+    btnCancelar.className = "modal-btn-cancelar";
+    btnCancelar.textContent = "Cancelar";
+    btnCancelar.addEventListener("click", function () {
+        overlay.remove();
+    });
+
+    const btnConfirmar = document.createElement("button");
+    btnConfirmar.type = "button";
+    btnConfirmar.className = "modal-btn-confirmar";
+    btnConfirmar.textContent = "Restablecer";
+    btnConfirmar.addEventListener("click", function () {
+        localStorage.removeItem(CLAVE_EDICIONES);
+        localStorage.removeItem(CLAVE_ELIMINADOS);
+        campoBuscar.value = "";
+        filtroCategoria.value = "todas";
+        cargarDestinos();
+        overlay.remove();
+    });
+
+    acciones.append(btnCancelar, btnConfirmar);
+    caja.append(titulo, texto, acciones);
+    overlay.append(caja);
+    document.body.append(overlay);
+}
 
 /*
 Lee del localStorage las ediciones guardadas:
@@ -83,6 +200,7 @@ function guardarEdicion(destino) {
         actividades: destino.actividades,
         horario: destino.horario,
         "reserva anticipada": destino["reserva anticipada"],
+        destacado: destino.destacado,
         url: destino.url
     };
     localStorage.setItem(CLAVE_EDICIONES, JSON.stringify(ediciones));
@@ -213,6 +331,23 @@ function crearFormularioEdicion(destino, tarjeta) {
     selectReserva.value = destino["reserva anticipada"] || "No";
     grupoEditables.append(crearGrupoCampo(`edit-reserva-${destino.id}`, "Reserva anticipada", selectReserva));
 
+    // Destacado: select con opciones true / false
+    const selectDestacado = document.createElement("select");
+    selectDestacado.name = "destacado";
+    selectDestacado.required = true;
+    [
+        { valor: "true", texto: "true" },
+        { valor: "false", texto: "false" }
+    ].forEach(({ valor, texto }) => {
+        const opcion = document.createElement("option");
+        opcion.value = valor;
+        opcion.textContent = texto;
+        selectDestacado.append(opcion);
+    });
+    const esDestacado = destino.destacado === true || destino.destacado === "true";
+    selectDestacado.value = esDestacado ? "true" : "false";
+    grupoEditables.append(crearGrupoCampo(`edit-destacado-${destino.id}`, "Destacado", selectDestacado));
+
     // URL: opcional; el navegador valida que sea una URL válida
     const inputUrl = document.createElement("input");
     inputUrl.type = "url";
@@ -251,6 +386,7 @@ function crearFormularioEdicion(destino, tarjeta) {
         destino.actividades = inputActividades.value.trim();
         destino.horario = inputHorario.value.trim();
         destino["reserva anticipada"] = selectReserva.value;
+        destino.destacado = selectDestacado.value === "true";
         destino.url = inputUrl.value.trim();
 
         guardarEdicion(destino);
@@ -320,13 +456,24 @@ function crearTarjeta(destino) {
     agregarDato(contenido, "Reserva anticipada", destino["reserva anticipada"]);
 
     if (enlaceCerrarSesion) {
-        // Página de administración: botón Editar
+        // Página de administración: botones Editar y Eliminar
+        const contenedorAcciones = document.createElement("div");
+        contenedorAcciones.className = "event-card__acciones";
+
         const botonEditar = document.createElement("button");
         botonEditar.type = "button";
         botonEditar.className = "btn-editar";
         botonEditar.textContent = "Editar";
         botonEditar.addEventListener("click", () => entrarModoEdicion(tarjeta, destino));
-        contenido.append(botonEditar);
+
+        const botonEliminar = document.createElement("button");
+        botonEliminar.type = "button";
+        botonEliminar.className = "btn-eliminar";
+        botonEliminar.textContent = "Eliminar";
+        botonEliminar.addEventListener("click", () => mostrarModalEliminar(destino));
+
+        contenedorAcciones.append(botonEditar, botonEliminar);
+        contenido.append(contenedorAcciones);
     } else if (/^https?:\/\//i.test(destino.url || "")) {
         // Página pública: enlace de reserva
         const enlace = document.createElement("a");
@@ -346,6 +493,7 @@ Llena el select de categorías con las
 categorías que existen en el JSON.
 */
 function llenarCategorias() {
+    filtroCategoria.innerHTML = '<option value="todas">Todas las categorías</option>';
     const categorias = [...new Set(destinos.map(destino => destino.categoria).filter(Boolean))];
 
     categorias.forEach(categoria => {
@@ -403,6 +551,9 @@ async function cargarDestinos() {
             throw new Error("destinos.json debe contener una lista de destinos.");
         }
 
+        const eliminados = obtenerEliminados();
+        destinos = destinos.filter(destino => !eliminados.includes(destino.id));
+
         aplicarEdicionesGuardadas();
         llenarCategorias();
         mostrarDestinos();
@@ -418,6 +569,11 @@ async function cargarDestinos() {
 
 campoBuscar.addEventListener("input", mostrarDestinos);
 filtroCategoria.addEventListener("change", mostrarDestinos);
+
+const botonRestablecer = document.getElementById("btn-restablecer");
+if (botonRestablecer) {
+    botonRestablecer.addEventListener("click", mostrarModalRestablecer);
+}
 
 if (enlaceCerrarSesion) {
     // Cerrar sesión: se limpia la sesión y se vuelve al inicio
