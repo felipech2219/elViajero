@@ -4,17 +4,15 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
 
-    /* Imagen de fondo: la ruta es relativa a este archivo CSS (css/),
-       por eso se sube un nivel con ../ para llegar a images/ */
     background-color: #f4f6f8;
-    background-image: url("../images/fondo.png");
+    background-image: url("/images/fondo.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
-/* Login centrado en pantalla */
+/* login centrado */
 .fondo-login {
     display: flex;
     justify-content: center;
@@ -23,7 +21,7 @@ body {
     padding: 20px;
 }
 
-/* Tarjeta con el mismo estilo de las tarjetas del sitio */
+/* tarjeta mismo estilo de las tarjetas del sitio */
 .tarjeta {
     background-color: white;
     padding: 32px;
@@ -37,7 +35,7 @@ body {
     border-top: 4px solid #2d6a4f;
 }
 
-/* Título con los colores del logo: verde con "Viajero" en amarillo */
+/* colores normales verde con "Viajero" en amarillo */
 .tarjeta h1 {
     margin-bottom: 6px;
     color: #1b4332;
@@ -142,4 +140,15 @@ button:hover {
 .volver:hover {
     background-color: #e9c46a;
     color: #2d6a4f;
+}
+
+@media (max-width: 768px) {
+    .destino-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .destino-controls input[type="search"] {
+        max-width: none;
+    }
 }

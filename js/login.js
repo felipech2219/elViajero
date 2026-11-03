@@ -1,4 +1,4 @@
-// Base de usuarios simulada (solo para práctica)
+// datos quemados
 const USUARIOS = [
   { usuario: "admin1",  clave: "1234", nombre: "Ana Rojas",  rol: "Administrador1" },
   { usuario: "admin2", clave: "abcd", nombre: "Luis Mora", rol: "Administrador2" }
@@ -14,19 +14,19 @@ const mensaje = document.getElementById("mensaje");
 const errorUsuario = document.getElementById("errorUsuario");
 const errorClave = document.getElementById("errorClave");
 
-// 1) Si ya hay una sesión activa, no tiene sentido mostrar el login
+// Si ya hay una sesión activa, no tiene sentido mostrar el login
 if (sessionStorage.getItem("sesion")) {
   window.location.replace("administrar.html");
 }
 
-// 2) Si el usuario pidió ser recordado, precargamos el campo (localStorage)
+// Si el usuario pidió ser recordado, precargamos el campo (localStorage)
 const recordado = localStorage.getItem("usuarioRecordado");
 if (recordado) {
   campoUsuario.value = recordado;
   chkRecordar.checked = true;
 }
 
-// 2b) Los mensajes de error se limpian mientras el usuario escribe
+// Los mensajes de error se limpian mientras el usuario escribe
 campoUsuario.addEventListener("input", function () {
   errorUsuario.textContent = "";
 });
@@ -35,7 +35,7 @@ campoClave.addEventListener("input", function () {
   errorClave.textContent = "";
 });
 
-// 3) Al enviar el formulario
+// Al enviar el formulario
 form.addEventListener("submit", function (evento) {
   evento.preventDefault();
 

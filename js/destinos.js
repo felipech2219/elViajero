@@ -1,17 +1,13 @@
 /*
 JS compartido por destino y administrar
 Ambas páginas cargan y muestran los destinos desde el JSON
-con buscador y filtro por categoría. Las diferencias de cada
-página se detectan por los elementos que existen en el DOM:
+con buscador y filtro por categoría.
 - administrar.html: protege la sesión y permite editar cada
   destino en la misma tarjeta, guardando en localStorage.
 - destino.html: agrega enlace de reserva y contador de resultados.
 */
 
-/* =========================
-1. PROTECCIÓN DE SESIÓN
-(solo aplica en administrar.html)
-========================= */
+/*solo aplica en administrar.html*/
 
 const enlaceCerrarSesion = document.getElementById("cerrar-sesion");
 
@@ -21,9 +17,7 @@ if (enlaceCerrarSesion && !sessionStorage.getItem("sesion")) {
     window.location.replace("login.html");
 }
 
-/* =========================
-2. REFERENCIAS DEL DOM
-========================= */
+/* dom referencias */
 
 const contenedorDestinos = document.getElementById("events-grid");
 const campoBuscar = document.getElementById("buscar");
@@ -33,9 +27,7 @@ const contadorResultados = document.getElementById("resultados");
 // Lista completa de destinos cargada desde el JSON
 let destinos = [];
 
-/* =========================
-3. FUNCIONES
-========================= */
+/* FUNCIONES */
 
 /*
 Agrega un párrafo con un dato del destino.
@@ -150,7 +142,7 @@ function crearFormularioEdicion(destino, tarjeta) {
     const formulario = document.createElement("form");
     formulario.className = "form-edicion";
 
-    /* ----- Campos bloqueados ----- */
+    /* Campos bloqueados */
     const grupoBloqueados = document.createElement("fieldset");
     const leyendaBloqueados = document.createElement("legend");
     leyendaBloqueados.textContent = "Datos no editables";
@@ -167,7 +159,7 @@ function crearFormularioEdicion(destino, tarjeta) {
         grupoBloqueados.append(crearGrupoCampo(`edit-${clave}-${destino.id}`, etiqueta, input));
     });
 
-    /* ----- Campos editables ----- */
+    /* Campos editables */
     const grupoEditables = document.createElement("fieldset");
     const leyendaEditables = document.createElement("legend");
     leyendaEditables.textContent = "Datos editables";
@@ -229,7 +221,7 @@ function crearFormularioEdicion(destino, tarjeta) {
     inputUrl.value = destino.url || "";
     grupoEditables.append(crearGrupoCampo(`edit-url-${destino.id}`, "URL de reserva", inputUrl));
 
-    /* ----- Botones de acción ----- */
+    /* Botones de acción */
     const acciones = document.createElement("p");
     acciones.className = "form-edicion__acciones";
 
@@ -422,9 +414,7 @@ async function cargarDestinos() {
     }
 }
 
-/* =========================
-4. EVENTOS
-========================= */
+/* EVENTOS*/
 
 campoBuscar.addEventListener("input", mostrarDestinos);
 filtroCategoria.addEventListener("change", mostrarDestinos);
@@ -436,8 +426,5 @@ if (enlaceCerrarSesion) {
     });
 }
 
-/* =========================
-5. INICIO
-========================= */
 
 cargarDestinos();

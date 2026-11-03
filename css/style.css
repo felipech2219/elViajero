@@ -1,9 +1,4 @@
-﻿/* =========================
-1. CSS BASE
-Reglas generales del sitio
-========================= */
-
-/* Elimina márgenes y espacios automáticos del navegador */
+﻿/* Elimina márgenes y espacios automáticos del navegador */
 * {
     margin: 0;
     padding: 0;
@@ -484,37 +479,13 @@ mientras se desplazan los campos
 /* =========================
 10. RESPONSIVE
 ========================= */
-
-/*
-Cambios para pantallas pequeñas
-*/
 @media (max-width: 768px) {
-
-    /*
-    Menú vertical
-    */
-    .header-content {
+    .destino-controls {
         flex-direction: column;
-        gap: 10px;
+        align-items: stretch;
     }
 
-    .main-nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-}
-
-/* Ajustes para teléfonos angostos */
-@media (max-width: 420px) {
-    .logo {
-        font-size: 1.15rem;
-    }
-
-    .section-heading h1 {
-        font-size: 1.75rem;
-    }
-
-    .event-card__content {
-        padding: 18px;
+    .destino-controls input[type="search"] {
+        max-width: none;
     }
 }

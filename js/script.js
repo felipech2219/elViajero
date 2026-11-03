@@ -1,15 +1,9 @@
-/* =========================
-1. REFERENCIAS DEL DOM
-========================= */
+/* dom */
 
 const contenedorDestinos = document.querySelector(".events-grid");
 
-/* =========================
-2. FUNCIONES
-========================= */
-
 /*
-Agrega un párrafo con un dato del destino.
+agregr un párrafo con un dato del destino.
 Si el valor está vacío, no agrega nada.
 */
 function agregarDato(contenido, etiqueta, valor) {
@@ -23,8 +17,7 @@ function agregarDato(contenido, etiqueta, valor) {
 }
 
 /*
-Crea una tarjeta de destino con su imagen,
-ubicación y datos principales.
+Crear tarjeta de destino 
 */
 function crearTarjeta(destino) {
     const tarjeta = document.createElement("article");
@@ -140,6 +133,5 @@ async function cargarDestinos() {
         }
     }
 }
-
 
 cargarDestinos();
