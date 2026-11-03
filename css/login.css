@@ -3,13 +3,11 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    /*color: #1f2937;
-    line-height: 1.6;
 
     /* Imagen de fondo: la ruta es relativa a este archivo CSS (css/),
        por eso se sube un nivel con ../ para llegar a images/ */
     background-color: #f4f6f8;
-    background-image: url("/images/fondo.png");
+    background-image: url("../images/fondo.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -102,9 +100,7 @@ button:hover {
     color: #2d6a4f;
 }
 
-/*
-embellecer error
-*/
+/* Mensajes de error del formulario */
 .error {
     display:block;
     color:#d62828;

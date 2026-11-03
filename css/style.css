@@ -1,4 +1,9 @@
-﻿/* Elimina márgenes y espacios automáticos del navegador */
+﻿/* =========================
+1. CSS BASE
+Reglas generales del sitio
+========================= */
+
+/* Elimina márgenes y espacios automáticos del navegador */
 * {
     margin: 0;
     padding: 0;
@@ -34,48 +39,27 @@ a {
     text-decoration: none;
 }
 
-/* Contenedor reutilizable para centrar contenido */
+/* =========================
+2. UTILIDADES GENERALES
+========================= */
+
+/* Contenedor centrado reutilizable */
 .container {
-    width: 90%;
-
-    /* Limita el ancho máximo en pantallas grandes */
-    max-width: 1100px;
-
-    /* Centra horizontalmente */
+    width: min(90%, 1100px);
     margin: 0 auto;
 }
 
 /* Espaciado vertical general */
 section {
-    padding: 40px 0;
+    padding: 48px 0;
 }
 
-/* Estilo base para títulos: cada uno se cambia por separado */
-h1 {
-    color: #1b4332;
-    margin-bottom: 15px;
-}
-
-h2 {
-    color: #1b4332;
-    margin-bottom: 15px;
-}
-
-h3 {
-    color: #1b4332;
-    margin-bottom: 15px;
-}
-
-h4 {
-    color: #1b4332;
-    margin-bottom: 15px;
-}
-
-h5 {
-    color: #1b4332;
-    margin-bottom: 15px;
-}
-
+/* Estilo base para títulos */
+h1,
+h2,
+h3,
+h4,
+h5,
 h6 {
     color: #1b4332;
     margin-bottom: 15px;
@@ -276,11 +260,6 @@ footer a:hover {
 
 footer h5 {
     color: #e9c46a;
-}
-
-footer ul {
-    list-style: none;
-    margin-bottom: 15px;
 }
 
 footer address {

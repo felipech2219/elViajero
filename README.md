@@ -7,13 +7,20 @@ En desarrollo
 # Estructura del proyecto
 ```
 elViajero/
-├── index.html          # Página principal
+├── index.html          # Página principal (inicio)
+├── destino.html        # Destinos con búsqueda y filtro
+├── login.html          # Ingreso de administradores
+├── administrar.html    # Panel de administración de destinos
 ├── css/
-│   └── style.css       # Hoja de estilos del sitio
+│   ├── style.css       # Estilos compartidos del sitio
+│   ├── destino.css     # Estilos de la página de destinos
+│   └── login.css       # Estilos de la página de ingreso
 ├── js/
-│   └── script.js       # Lógica JavaScript
-├── assets/
-│   └── images/         # Imágenes del sitio
+│   ├── script.js       # Carga de destinos en el inicio
+│   ├── destinos.js     # Búsqueda, filtro y edición de destinos
+│   ├── login.js        # Validación e ingreso de administradores
+│   └── utilidades.js   # Funciones de apoyo (cookies)
+├── images/             # Imágenes del sitio
 ├── data/
 │   └── destinos.json   # Datos de destinos (JSON)
 └── docs/               # Documentación del curso

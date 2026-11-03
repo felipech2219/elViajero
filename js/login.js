@@ -10,7 +10,7 @@ const campoClave = document.getElementById("clave");
 const chkRecordar = document.getElementById("recordarme");
 const mensaje = document.getElementById("mensaje");
 
-/*mensaje error login*/ 
+/* Mensajes de error del login */
 const errorUsuario = document.getElementById("errorUsuario");
 const errorClave = document.getElementById("errorClave");
 
@@ -69,7 +69,6 @@ form.addEventListener("submit", function (evento) {
   const datosSesion = {
     usuario: encontrado.usuario,
     nombre: encontrado.nombre,
-    correo: encontrado.correo,
     rol: encontrado.rol,
     horaIngreso: new Date().toLocaleString("es-CR"),
     accesoAnterior: getCookie("ultimoAcceso") || "Primer ingreso"
