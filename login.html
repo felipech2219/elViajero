@@ -1,36 +1,48 @@
 <!DOCTYPE html>
-<html lan="es">
+<html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ingreso Admin | elViajero</title>
-  <link rel="stylesheet" href="css/login.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Ingreso de administradores de elViajero para gestionar los destinos turísticos de Costa Rica.">
+    <meta name="keywords" content="viajes, Costa Rica, destinos, administración, turismo">
+    <meta name="author" content="elViajero">
+    <link rel="stylesheet" href="css/login.css">
+    <title>elViajero | Ingreso Admin</title>
 </head>
+
 <body class="fondo-login">
-  <main class="tarjeta">
-    <h1>el<span>Viajero</span></h1>
-    <p>Ingresa con tu usuario</p>
-    <form id="formLogin">
-      <label for="usuario">Usuario</label>
-      <input type="text" id="usuario">
-      <small class="error" id="errorUsuario"></small>
+    <!-- Contenido principal -->
+    <main class="tarjeta">
+        <h1>el<span>Viajero</span></h1>
+        <p>Ingresa con tu usuario</p>
 
-      <label for="clave">Contraseña</label>
-      <input type="password" id="clave">
-      <small class="error" id="errorClave"></small>
+        <form id="formLogin">
+            <label for="usuario">Usuario</label>
+            <input type="text" id="usuario">
+            <small class="error" id="errorUsuario"></small>
 
-      <label class="check">
-        <input type="checkbox" id="recordarme"> Recordar mi usuario
-      </label>
+            <label for="clave">Contraseña</label>
+            <input type="password" id="clave">
+            <small class="error" id="errorClave"></small>
 
-      <p id="mensaje" class="mensaje"></p>
-      <div class="acciones">
-        <a href="index.html" class="volver">Volver</a>
-        <button type="submit">Ingresar</button>
-      </div>
-    </form>
-  </main>
-  <script src="js/utilidades.js"></script>
-  <script src="js/login.js"></script>
+            <label class="check">
+                <input type="checkbox" id="recordarme"> Recordar mi usuario
+            </label>
+
+            <p id="mensaje" class="mensaje"></p>
+
+            <div class="acciones">
+                <a href="index.html" class="volver">Volver</a>
+                <button type="submit">Ingresar</button>
+            </div>
+        </form>
+    </main>
+
+    <!-- scripts al final del body -->
+    <script src="js/utilidades.js"></script>
+    <script src="js/login.js"></script>
 </body>
+
 </html>
