@@ -1,7 +1,7 @@
 // datos quemados
 const USUARIOS = [
-  { usuario: "admin1",  clave: "1234", nombre: "Ana Rojas",  rol: "Administrador1" },
-  { usuario: "admin2", clave: "abcd", nombre: "Luis Mora", rol: "Administrador2" }
+  { usuario: "admin1",  clave: "1234", nombre: "Felipe Chavarría",  rol: "Administrador1" },
+  { usuario: "admin2", clave: "abcd", nombre: "Jose Herrera", rol: "Administrador2" }
 ];
 
 const form = document.getElementById("formLogin");
