@@ -3,7 +3,8 @@ JS compartido por destino y administrar
 Ambas páginas cargan y muestran los destinos desde el JSON
 con buscador y filtro por categoría. Las diferencias de cada
 página se detectan por los elementos que existen en el DOM:
-- administrar.html: protege la sesión y agrega botón Editar.
+- administrar.html: protege la sesión y permite editar cada
+  destino en la misma tarjeta, guardando en localStorage.
 - destino.html: agrega enlace de reserva y contador de resultados.
 */
 
@@ -50,12 +51,234 @@ function agregarDato(contenido, etiqueta, valor) {
     contenido.append(dato);
 }
 
+/* -------- Edición inline (solo administrar.html) -------- */
+
+// Clave de localStorage donde se guardan las ediciones
+const CLAVE_EDICIONES = "destinosEditados";
+
+// Campos que se muestran bloqueados (solo lectura) en el formulario
+const CAMPOS_BLOQUEADOS = [
+    { clave: "id", etiqueta: "ID" },
+    { clave: "nombre", etiqueta: "Nombre" },
+    { clave: "ubicacion", etiqueta: "Ubicación" },
+    { clave: "imagen", etiqueta: "Imagen" }
+];
+
 /*
-Acción del botón Editar de cada tarjeta.
-Por ahora muestra qué destino se va a editar.
+Lee del localStorage las ediciones guardadas:
+un objeto con el id del destino como clave
+y los campos editados como valor.
 */
-function editarDestino(destino) {
-    alert(`Editar destino: ${destino.nombre}\n\nLa edición de destinos estará disponible próximamente.`);
+function obtenerEdicionesGuardadas() {
+    try {
+        return JSON.parse(localStorage.getItem(CLAVE_EDICIONES)) || {};
+    } catch (error) {
+        console.error("No se pudieron leer las ediciones guardadas:", error);
+        return {};
+    }
+}
+
+/*
+Guarda en localStorage los campos editables
+del destino que se acaba de modificar.
+*/
+function guardarEdicion(destino) {
+    const ediciones = obtenerEdicionesGuardadas();
+    ediciones[destino.id] = {
+        categoria: destino.categoria,
+        descripcion: destino.descripcion,
+        clima: destino.clima,
+        actividades: destino.actividades,
+        horario: destino.horario,
+        "reserva anticipada": destino["reserva anticipada"],
+        url: destino.url
+    };
+    localStorage.setItem(CLAVE_EDICIONES, JSON.stringify(ediciones));
+}
+
+/*
+Aplica sobre la lista cargada del JSON las
+ediciones que estén guardadas en localStorage,
+para recuperarlas automáticamente al recargar.
+*/
+function aplicarEdicionesGuardadas() {
+    const ediciones = obtenerEdicionesGuardadas();
+    destinos = destinos.map(destino =>
+        ediciones[destino.id] ? { ...destino, ...ediciones[destino.id] } : destino
+    );
+}
+
+/*
+Envuelve un control con su label, asociados
+mediante los atributos for e id.
+*/
+function crearGrupoCampo(idCampo, etiqueta, control) {
+    const grupo = document.createElement("p");
+    grupo.className = "form-grupo";
+
+    const label = document.createElement("label");
+    label.htmlFor = idCampo;
+    label.textContent = etiqueta;
+
+    control.id = idCampo;
+    grupo.append(label, control);
+    return grupo;
+}
+
+/*
+Crea un input de texto corto editable (clima,
+actividades, horario) con su valor inicial.
+*/
+function crearInputEditable(nombre, valor) {
+    const input = document.createElement("input");
+    input.type = "text";
+    input.name = nombre;
+    input.required = true;
+    input.value = valor || "";
+    return input;
+}
+
+/*
+Construye el formulario de edición de un destino.
+Los campos id, nombre, ubicación e imagen se muestran
+bloqueados (solo lectura y en gris); el resto se edita
+con el control apropiado (select, input o textarea).
+Al enviar se actualiza el destino y se guarda en
+localStorage; al cancelar se restaura la tarjeta.
+*/
+function crearFormularioEdicion(destino, tarjeta) {
+    const formulario = document.createElement("form");
+    formulario.className = "form-edicion";
+
+    /* ----- Campos bloqueados ----- */
+    const grupoBloqueados = document.createElement("fieldset");
+    const leyendaBloqueados = document.createElement("legend");
+    leyendaBloqueados.textContent = "Datos no editables";
+    grupoBloqueados.append(leyendaBloqueados);
+
+    CAMPOS_BLOQUEADOS.forEach(({ clave, etiqueta }) => {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.name = clave;
+        input.value = destino[clave] || "";
+        input.readOnly = true;
+        input.tabIndex = -1;
+        input.className = "campo-bloqueado";
+        grupoBloqueados.append(crearGrupoCampo(`edit-${clave}-${destino.id}`, etiqueta, input));
+    });
+
+    /* ----- Campos editables ----- */
+    const grupoEditables = document.createElement("fieldset");
+    const leyendaEditables = document.createElement("legend");
+    leyendaEditables.textContent = "Datos editables";
+    grupoEditables.append(leyendaEditables);
+
+    // Categoría: select con las categorías que existen en los datos
+    const selectCategoria = document.createElement("select");
+    selectCategoria.name = "categoria";
+    selectCategoria.required = true;
+    const categorias = [...new Set(destinos.map(d => d.categoria).filter(Boolean))];
+    if (destino.categoria && !categorias.includes(destino.categoria)) {
+        categorias.push(destino.categoria);
+    }
+    categorias.forEach(categoria => {
+        const opcion = document.createElement("option");
+        opcion.value = categoria;
+        opcion.textContent = categoria;
+        selectCategoria.append(opcion);
+    });
+    selectCategoria.value = destino.categoria || "";
+    grupoEditables.append(crearGrupoCampo(`edit-categoria-${destino.id}`, "Categoría", selectCategoria));
+
+    // Descripción: textarea por ser un texto largo
+    const textareaDescripcion = document.createElement("textarea");
+    textareaDescripcion.name = "descripcion";
+    textareaDescripcion.rows = 3;
+    textareaDescripcion.required = true;
+    textareaDescripcion.value = destino.descripcion || "";
+    grupoEditables.append(crearGrupoCampo(`edit-descripcion-${destino.id}`, "Descripción", textareaDescripcion));
+
+    // Clima, actividades y horario: textos cortos
+    const inputClima = crearInputEditable("clima", destino.clima);
+    grupoEditables.append(crearGrupoCampo(`edit-clima-${destino.id}`, "Clima", inputClima));
+
+    const inputActividades = crearInputEditable("actividades", destino.actividades);
+    grupoEditables.append(crearGrupoCampo(`edit-actividades-${destino.id}`, "Actividades", inputActividades));
+
+    const inputHorario = crearInputEditable("horario", destino.horario);
+    grupoEditables.append(crearGrupoCampo(`edit-horario-${destino.id}`, "Horario", inputHorario));
+
+    // Reserva anticipada: select con las dos opciones posibles
+    const selectReserva = document.createElement("select");
+    selectReserva.name = "reserva anticipada";
+    selectReserva.required = true;
+    ["Si", "No"].forEach(textoOpcion => {
+        const opcion = document.createElement("option");
+        opcion.value = textoOpcion;
+        opcion.textContent = textoOpcion;
+        selectReserva.append(opcion);
+    });
+    selectReserva.value = destino["reserva anticipada"] || "No";
+    grupoEditables.append(crearGrupoCampo(`edit-reserva-${destino.id}`, "Reserva anticipada", selectReserva));
+
+    // URL: opcional; el navegador valida que sea una URL válida
+    const inputUrl = document.createElement("input");
+    inputUrl.type = "url";
+    inputUrl.name = "url";
+    inputUrl.placeholder = "https://ejemplo.com/";
+    inputUrl.value = destino.url || "";
+    grupoEditables.append(crearGrupoCampo(`edit-url-${destino.id}`, "URL de reserva", inputUrl));
+
+    /* ----- Botones de acción ----- */
+    const acciones = document.createElement("p");
+    acciones.className = "form-edicion__acciones";
+
+    const botonGuardar = document.createElement("button");
+    botonGuardar.type = "submit";
+    botonGuardar.className = "btn-guardar";
+    botonGuardar.textContent = "Guardar Cambios";
+
+    const botonCancelar = document.createElement("button");
+    botonCancelar.type = "button";
+    botonCancelar.className = "btn-cancelar";
+    botonCancelar.textContent = "Cancelar";
+    botonCancelar.addEventListener("click", () => {
+        // El destino no se modificó: se reconstruye la tarjeta original
+        tarjeta.replaceWith(crearTarjeta(destino));
+    });
+
+    acciones.append(botonGuardar, botonCancelar);
+    formulario.append(grupoBloqueados, grupoEditables, acciones);
+
+    formulario.addEventListener("submit", evento => {
+        evento.preventDefault();
+
+        destino.categoria = selectCategoria.value;
+        destino.descripcion = textareaDescripcion.value.trim();
+        destino.clima = inputClima.value.trim();
+        destino.actividades = inputActividades.value.trim();
+        destino.horario = inputHorario.value.trim();
+        destino["reserva anticipada"] = selectReserva.value;
+        destino.url = inputUrl.value.trim();
+
+        guardarEdicion(destino);
+        tarjeta.replaceWith(crearTarjeta(destino));
+    });
+
+    return formulario;
+}
+
+/*
+Acción del botón Editar: cambia la misma tarjeta a
+modo edición, sin navegar a otra página ni abrir
+ventanas emergentes. La tarjeta conserva su lugar,
+su imagen y su ubicación; solo su contenido se
+reemplaza por el formulario de edición.
+*/
+function entrarModoEdicion(tarjeta, destino) {
+    tarjeta.classList.add("event-card--editando");
+    const contenido = tarjeta.querySelector(".event-card__content");
+    contenido.replaceChildren(crearFormularioEdicion(destino, tarjeta));
 }
 
 /*
@@ -110,7 +333,7 @@ function crearTarjeta(destino) {
         botonEditar.type = "button";
         botonEditar.className = "btn-editar";
         botonEditar.textContent = "Editar";
-        botonEditar.addEventListener("click", () => editarDestino(destino));
+        botonEditar.addEventListener("click", () => entrarModoEdicion(tarjeta, destino));
         contenido.append(botonEditar);
     } else if (/^https?:\/\//i.test(destino.url || "")) {
         // Página pública: enlace de reserva
@@ -188,6 +411,7 @@ async function cargarDestinos() {
             throw new Error("destinos.json debe contener una lista de destinos.");
         }
 
+        aplicarEdicionesGuardadas();
         llenarCategorias();
         mostrarDestinos();
     } catch (error) {

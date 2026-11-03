@@ -80,6 +80,25 @@ function crearTarjeta(destino) {
 }
 
 /*
+Aplica sobre la lista cargada del JSON las
+ediciones guardadas en localStorage desde el
+panel de administración, para que el inicio
+muestre la misma información actualizada.
+*/
+function aplicarEdicionesGuardadas(destinos) {
+    let ediciones = {};
+    try {
+        ediciones = JSON.parse(localStorage.getItem("destinosEditados")) || {};
+    } catch (error) {
+        console.error("No se pudieron leer las ediciones guardadas:", error);
+    }
+
+    return destinos.map(destino =>
+        ediciones[destino.id] ? { ...destino, ...ediciones[destino.id] } : destino
+    );
+}
+
+/*
 Carga los destinos desde el archivo JSON
 y los muestra en pantalla dinámicamente.
 */
@@ -99,13 +118,15 @@ async function cargarDestinos() {
             throw new Error("destinos.json debe contener una lista de destinos.");
         }
 
+        const destinosActualizados = aplicarEdicionesGuardadas(destinos);
+
         contenedorDestinos.replaceChildren();
-        if (destinos.length === 0) {
+        if (destinosActualizados.length === 0) {
             contenedorDestinos.textContent = "No hay destinos registrados.";
             return;
         }
 
-        destinos.forEach(destino => {
+        destinosActualizados.forEach(destino => {
             contenedorDestinos.append(crearTarjeta(destino));
         });
     } catch (error) {

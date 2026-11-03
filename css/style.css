@@ -365,6 +365,143 @@ footer address {
     color: #2d6a4f;
 }
 
+/* Tarjeta en modo edición: conserva su lugar y tamaño */
+.event-card--editando {
+    border-color: #2d6a4f;
+}
+
+/* Sin efecto de agrandar mientras se edita */
+.event-card--editando:hover {
+    transform: none;
+}
+
+/*
+Formulario de edición dentro de la tarjeta:
+altura limitada con desplazamiento interno
+para que la tarjeta no crezca de más
+*/
+.form-edicion {
+    max-height: 380px;
+    overflow-y: auto;
+
+    /* Espacio a la derecha para que la barra
+       de desplazamiento no toque los campos */
+    padding-right: 10px;
+}
+
+.form-edicion fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 8px;
+}
+
+/*
+El legend se mantiene en el HTML por semántica
+y accesibilidad, pero no se muestra en pantalla
+*/
+.form-edicion legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Cada campo: label encima del control */
+.form-grupo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 6px;
+}
+
+.form-grupo label {
+    font-weight: bold;
+    font-size: 0.8rem;
+    margin-bottom: 2px;
+}
+
+.form-edicion input,
+.form-edicion select,
+.form-edicion textarea {
+    width: 100%;
+    padding: 5px 8px;
+    border: 1px solid #d9e2dd;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-family: inherit;
+    background-color: white;
+    color: #1f2937;
+}
+
+.form-edicion textarea {
+    resize: vertical;
+}
+
+.form-edicion input:focus,
+.form-edicion select:focus,
+.form-edicion textarea:focus {
+    outline: 2px solid #2d6a4f;
+    border-color: #2d6a4f;
+}
+
+/* Campos bloqueados: gris y solo lectura */
+.form-edicion .campo-bloqueado {
+    background-color: #e6e6e6;
+    color: #6b7280;
+    border-color: #d1d5db;
+    cursor: not-allowed;
+}
+
+/*
+Botones Guardar Cambios y Cancelar:
+quedan fijos al pie del formulario
+mientras se desplazan los campos
+*/
+.form-edicion__acciones {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 0;
+    padding-top: 6px;
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+}
+
+.btn-guardar,
+.btn-cancelar {
+    display: inline-block;
+    padding: 6px 12px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+
+    /* Cambio suave de color al pasar el mouse */
+    transition: background-color 0.3s ease;
+}
+
+.btn-guardar {
+    background-color: #2d6a4f;
+    color: white;
+}
+
+.btn-guardar:hover {
+    background-color: #e9c46a;
+    color: #2d6a4f;
+}
+
+.btn-cancelar {
+    background-color: #9ca3af;
+    color: white;
+}
+
+.btn-cancelar:hover {
+    background-color: #6b7280;
+}
+
 /* =========================
 10. RESPONSIVE
 ========================= */
