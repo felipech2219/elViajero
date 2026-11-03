@@ -54,6 +54,7 @@ const CAMPOS_BLOQUEADOS = [
     { clave: "id", etiqueta: "ID" },
     { clave: "nombre", etiqueta: "Nombre" },
     { clave: "ubicacion", etiqueta: "Ubicación" },
+    { clave: "reserva anticipada", etiqueta: "Reserva anticipada" },
     { clave: "imagen", etiqueta: "Imagen" }
 ];
 
@@ -199,7 +200,6 @@ function guardarEdicion(destino) {
         clima: destino.clima,
         actividades: destino.actividades,
         horario: destino.horario,
-        "reserva anticipada": destino["reserva anticipada"],
         destacado: destino.destacado,
         url: destino.url
     };
@@ -318,19 +318,6 @@ function crearFormularioEdicion(destino, tarjeta) {
     const inputHorario = crearInputEditable("horario", destino.horario);
     grupoEditables.append(crearGrupoCampo(`edit-horario-${destino.id}`, "Horario", inputHorario));
 
-    // Reserva anticipada: select con las dos opciones posibles
-    const selectReserva = document.createElement("select");
-    selectReserva.name = "reserva anticipada";
-    selectReserva.required = true;
-    ["Si", "No"].forEach(textoOpcion => {
-        const opcion = document.createElement("option");
-        opcion.value = textoOpcion;
-        opcion.textContent = textoOpcion;
-        selectReserva.append(opcion);
-    });
-    selectReserva.value = destino["reserva anticipada"] || "No";
-    grupoEditables.append(crearGrupoCampo(`edit-reserva-${destino.id}`, "Reserva anticipada", selectReserva));
-
     // Destacado: select con opciones true / false
     const selectDestacado = document.createElement("select");
     selectDestacado.name = "destacado";
@@ -348,13 +335,18 @@ function crearFormularioEdicion(destino, tarjeta) {
     selectDestacado.value = esDestacado ? "true" : "false";
     grupoEditables.append(crearGrupoCampo(`edit-destacado-${destino.id}`, "Destacado", selectDestacado));
 
-    // URL: opcional; el navegador valida que sea una URL válida
-    const inputUrl = document.createElement("input");
-    inputUrl.type = "url";
-    inputUrl.name = "url";
-    inputUrl.placeholder = "https://ejemplo.com/";
-    inputUrl.value = destino.url || "";
-    grupoEditables.append(crearGrupoCampo(`edit-url-${destino.id}`, "URL de reserva", inputUrl));
+    // URL de reserva: solo editable si requiere reserva anticipada ("Si")
+    const requiereReserva = String(destino["reserva anticipada"] || "").toLowerCase() === "si";
+    let inputUrl = null;
+
+    if (requiereReserva) {
+        inputUrl = document.createElement("input");
+        inputUrl.type = "url";
+        inputUrl.name = "url";
+        inputUrl.placeholder = "https://ejemplo.com/";
+        inputUrl.value = destino.url || "";
+        grupoEditables.append(crearGrupoCampo(`edit-url-${destino.id}`, "URL de reserva", inputUrl));
+    }
 
     /* Botones de acción */
     const acciones = document.createElement("p");
@@ -385,9 +377,8 @@ function crearFormularioEdicion(destino, tarjeta) {
         destino.clima = inputClima.value.trim();
         destino.actividades = inputActividades.value.trim();
         destino.horario = inputHorario.value.trim();
-        destino["reserva anticipada"] = selectReserva.value;
         destino.destacado = selectDestacado.value === "true";
-        destino.url = inputUrl.value.trim();
+        destino.url = inputUrl ? inputUrl.value.trim() : "";
 
         guardarEdicion(destino);
         tarjeta.replaceWith(crearTarjeta(destino));
@@ -526,7 +517,7 @@ function mostrarDestinos() {
 
     contenedorDestinos.replaceChildren();
     if (filtrados.length === 0) {
-        contenedorDestinos.textContent = "No se encontraron destinos con esos criterios.";
+        contenedorDestinos.textContent = "No se encontraron destinos ";
         return;
     }
 

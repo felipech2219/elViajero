@@ -77,9 +77,7 @@ p {
 }
 
 /*
-flex:
-organiza el logo y el menú en horizontal
-*/
+flex:organiza el logo y el menú en horizontal*/
 .header-content {
     display: flex;
     align-items: center;
@@ -155,10 +153,7 @@ main {
 6. SECCIÓN DESTINOS
 ========================= */
 
-/*
-grid:
-organiza las tarjetas y las adapta al ancho disponible
-*/
+/*grid: organizar las tarjetas */
 .events-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 320px));
