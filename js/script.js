@@ -2,6 +2,9 @@
 
 const contenedorDestinos = document.querySelector(".events-grid");
 
+
+
+
 /*
 agregr un párrafo con un dato del destino.
 Si el valor está vacío, no agrega nada.
@@ -119,9 +122,18 @@ async function cargarDestinos() {
             return;
         }
 
-        destinosActualizados.forEach(destino => {
+        /*destinosActualizados.forEach(destino => {
             contenedorDestinos.append(crearTarjeta(destino));
+        });*/
+
+        const destacados = destinosActualizados.filter(
+        destino => destino.destacado === true
+        );
+
+        destacados.forEach(destino => {
+        contenedorDestinos.append(crearTarjeta(destino));
         });
+
     } catch (error) {
         console.error("Error al cargar destinos:", error);
         if (contenedorDestinos) {
